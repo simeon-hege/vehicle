@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="vehicle.milage_list">
+      <field name="name">vehicle milage list</field>
+      <field name="model">vehicle.milage_entry_line</field>
+      <field name="arch" type="xml">
+        <tree editable="bottom">
+          <field name="customer_readonly" invisible="1"/>
+          <field name="sale_id_readonly" invisible="1"/>
+          <field name="move_id_readonly" invisible="1"/>
+          <field name="date"/>
+          <field name="vehicle_id"/>
+          <field name="miles"/>
+          <field name="milage_type"/>
+          <field name="customer" attrs="{'readonly':[('customer_readonly', '=', True)]}"/>
+          <field name="sale_id" attrs="{'readonly':[('sale_id_readonly', '=', True)]}"/>
+          <field name="move_id" attrs="{'readonly':[('move_id_readonly', '=', True)]}"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle.milage_form_view">
+      <field name="name">vehicle milage form</field>
+      <field name="model">vehicle.milage_entry_line</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="customer_readonly" invisible="1"/>
+          <field name="sale_id_readonly" invisible="1"/>
+          <field name="move_id_readonly" invisible="1"/>
+          <group>
+            <group>
+              <field name="date"/>
+              <field name="vehicle_id"/>
+              <field name="miles"/>
+              <field name="milage_type"/>
+            </group>
+            <group>
+              <field name="customer" attrs="{'readonly':[('customer_readonly', '=', True)]}"/>
+              <field name="sale_id" attrs="{'readonly':[('sale_id_readonly', '=', True)]}"/>
+              <field name="move_id" attrs="{'readonly':[('move_id_readonly', '=', True)]}"/>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vehicle.action_milage_entries">
+      <field name="name">Milage Entries</field>
+      <field name="res_model">vehicle.milage_entry_line</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Milage Entries" id="vehicle.milage_entries" 
+      parent="vehicle.menu_root" action="vehicle.action_milage_entries"/>
+  </data>
+</odoo>

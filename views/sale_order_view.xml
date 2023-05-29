@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="vehicle.sale_order_view">
+      <field name="name">Sale Order</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <group name="sale_info" position="after">
+          <group>
+            <button name="enter_vehicle_milage" type="object" string="Enter Vehicle Milage" class="oe_highlight"/>
+          </group>
+        </group>
+      </field>
+    </record>
+  </data>
+</odoo>
