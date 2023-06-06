@@ -10,8 +10,9 @@
           <field name="move_id_readonly" invisible="1"/>
           <field name="date"/>
           <field name="vehicle_id"/>
-          <field name="miles"/>
+          <field name="miles" sum="Total"/>
           <field name="milage_type"/>
+          <field name="notes"/>
           <field name="customer" attrs="{'readonly':[('customer_readonly', '=', True)]}"/>
           <field name="sale_id" attrs="{'readonly':[('sale_id_readonly', '=', True)]}"/>
           <field name="move_id" attrs="{'readonly':[('move_id_readonly', '=', True)]}"/>
@@ -40,6 +41,7 @@
               <field name="move_id" attrs="{'readonly':[('move_id_readonly', '=', True)]}"/>
             </group>
           </group>
+          <group><field name="notes"/></group>
         </form>
       </field>
     </record>

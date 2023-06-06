@@ -15,8 +15,9 @@ class MilageEntryLine(models.Model):
         store=True, readonly=False)
     sale_id = fields.Many2one(comodel_name="sale.order",  compute="_on_move_id_change",
         store=True, readonly=False)
-    move_id = fields.Many2one(comodel_name="stock.move", compute="_on_customer_change",
+    move_id = fields.Many2one(comodel_name="stock.picking", compute="_on_customer_change",
         store=True, readonly=False)
+    notes = fields.Char()
     customer_readonly = fields.Boolean(default=False)
     sale_id_readonly = fields.Boolean(default=False)
     move_id_readonly = fields.Boolean(default=False)
@@ -42,13 +43,14 @@ class MilageEntryLine(models.Model):
 
     @api.depends('move_id')
     def _on_move_id_change(self):
-        if self.move_id and self.move_id.sale_line_id:
-            if self.move_id.sale_line_id:
-                self.sale_id = self.move_id.sale_line_id.order_id
+        if self.move_id and self.move_id.sale_id:
+            if self.move_id.sale_id:
+                self.sale_id = self.move_id.sale_id
             else:
                 self.sale_id.id = None
             self.customer = self.move_id.partner_id
         elif self.move_id:
             self.sale_id = None
-            self.customer = self.move_id.order_partner_id
+            self.customer = self.move_id.partner_id
+
             

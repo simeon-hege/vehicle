@@ -6,6 +6,7 @@
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
+          <button name="action_milage_entries" type="object" class="oe_highlight" icon="fa-car" string="Milage Entries"/>
         </tree>
       </field>
     </record>
@@ -18,10 +19,20 @@
           <header/>
           <sheet>
             <div class="oe_button_box" name="button_box">
-              <button name="action_milage_entries" string="Milage Entries"
-                type="object" class="oe_stat_button" icon="fa-car"/>
+              <button name="action_milage_entries_in_range" type="object" class="oe_stat_button" icon="fa-car">
+                <field name="milage_count_in_range" widget="statinfo" string="Miles"/>
+                <label for="milage_count_in_range" string="In Range"/>
+              </button>
+              <button name="action_milage_entries" type="object" class="oe_stat_button" icon="fa-car">
+                <field name="milage_count" widget="statinfo" string="Miles"/>
+                <label for="milage_count" string="Total"/>
+              </button>
             </div>
             <group><field name="name"/></group>
+            <group col="2">
+              <group><field name="start_date"/></group>
+              <group><field name="end_date"/></group>
+            </group>
           </sheet>
         </form>
       </field>
@@ -34,33 +45,5 @@
     </record>
 
     <menuitem name="Vehicle" id="vehicle.menu_root" action="vehicle.action_window"/>
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="vehicle.action_server">
-      <field name="name">vehicle server</field>
-      <field name="model_id" ref="model_vehicle_vehicle"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="vehicle.menu_1" parent="vehicle.menu_root"/>
-    <menuitem name="Menu 2" id="vehicle.menu_2" parent="vehicle.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="vehicle.menu_1_list" parent="vehicle.menu_1"
-              action="vehicle.action_window"/>
-    <menuitem name="Server to list" id="vehicle" parent="vehicle.menu_2"
-              action="vehicle.action_server"/>
--->
   </data>
 </odoo>
