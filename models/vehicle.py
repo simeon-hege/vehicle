@@ -19,7 +19,11 @@ class vehicle(models.Model):
     def action_milage_entries_in_range(self):
         milage_entries = []
         for ln in self.milage_entry_line_ids:
-            if (not ln.date < self.start_date) and (not ln.date > self.end_date):
+            if (not self.start_date) and (not self.end_date):
+                milage_entries.append(ln.id)
+            elif (not self.end_date) and (ln.date >= self.start_date):
+                milage_entries.append(ln.id)
+            elif (ln.date) and (ln.date >= self.start_date) and (ln.date <= self.end_date):
                 milage_entries.append(ln.id)
         return{
             'name': _("Milage Entries"),
@@ -46,9 +50,11 @@ class vehicle(models.Model):
         for vhcl in self:
             total = 0.0
             for line in vhcl.milage_entry_line_ids:
-                if (not vhcl.start_date) or (not vhcl.end_date):
+                if (not vhcl.start_date) and (not vhcl.end_date):
                     total = total + line.miles
-                elif (line.date) and (line.date > vhcl.start_date) and (line.date < vhcl.end_date):
+                elif (not vhcl.end_date) and (line.date >= vhcl.start_date):
+                    total = total + line.miles
+                elif (line.date) and (line.date >= vhcl.start_date) and (line.date <= vhcl.end_date):
                     total = total + line.miles
             vhcl.milage_count_in_range = total
     
