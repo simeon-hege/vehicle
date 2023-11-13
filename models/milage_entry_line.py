@@ -53,4 +53,9 @@ class MilageEntryLine(models.Model):
             self.sale_id = None
             self.customer = self.move_id.partner_id
 
+    def save_record(self):
+        self.ensure_one()
+        self.write({})
+        return
+
             
