@@ -13,7 +13,7 @@ class vehicle(models.Model):
     milage_count = fields.Float(compute="_compute_milage_count")
     start_date = fields.Date()
     end_date = fields.Date()
-
+ 
     def action_milage_entries_in_range(self):
         milage_entries = []
         for ln in self.milage_entry_line_ids:
